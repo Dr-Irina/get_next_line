@@ -12,11 +12,10 @@
 
 #include "get_next_line.h"
 
-int						read_file(t_new_l *line)
+int						read_file(t_new_l *line, char *buff)
 {
 	int		ret;
 	char	*str;
-	char	buff[BUFF_SIZE + 1];
 
 	if (!(line->str))
 		line->str = ft_strnew(0);
@@ -95,13 +94,13 @@ int						get_next_line(int const fd, char **line)
 	static t_new_l		*newl;
 	t_new_l				*node;
 	int					ret;
+	char				*buff;
 
-	if (!line)
+	if (!line || fd < 0 || !(node = list(&newl, fd)))
 		return (-1);
-	node = list(&newl, fd);
-	if (node == NULL)
-		return (-1);
-	if ((ret = read_file(node)) > 0)
+	buff = ft_memalloc(BUFF_SIZE + 1);
+	if ((ret = read_file(node, buff)) > 0)
 		fin(node, line);
+	free(buff);
 	return (ret);
 }
