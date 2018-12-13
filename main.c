@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrice <hrice@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 13:12:53 by hrice             #+#    #+#             */
-/*   Updated: 2018/12/11 15:34:33 by hrice            ###   ########.fr       */
+/*   Created: 2018/12/11 13:45:56 by hrice             #+#    #+#             */
+/*   Updated: 2018/12/11 15:46:13 by hrice            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
+#include <fcntl.h>
 
-char		*ft_strnew(size_t size)
+int		main(int argc, char **argv)
 {
-	char	*str;
+	int		fd;
+	char	*line;
 
-	if (size + 1 == 0)
-		return (NULL);
-	str = (char *)malloc(size + 1);
-	if (str)
-		return (ft_memset(str, '\0', size + 1));
+	if (argc == 1)
+		fd = 0;
+	else if (argc == 2)
+		fd = open(argv[1], O_RDONLY);
 	else
-		return (NULL);
+		return (2);
+	while (get_next_line(fd, &line) == 1)
+	{
+		ft_putendl(line);
+		free(line);
+	}
+	if (argc == 2)
+		close(fd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrice <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: hrice <hrice@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:26:05 by hrice             #+#    #+#             */
-/*   Updated: 2018/12/08 18:26:40 by hrice            ###   ########.fr       */
+/*   Updated: 2018/12/11 20:04:42 by hrice            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int						read_file(t_new_l *line, char *buff)
 		str = ft_strjoin(line->str, buff);
 		ft_strdel(&(line->str));
 		line->str = str;
-		if (ft_strrchr(buff, '\n'))
+		if (ft_strchr(buff, '\n'))
 			return (1);
 	}
 	if (ret == 0 && line->str[0])
